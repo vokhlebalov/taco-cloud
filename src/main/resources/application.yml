@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:49154/taco_cloud?currentSchema=taco_cloud
+    username: postgres
+  web:
+    resources:
+      static-locations: file:src/main/resources/static/
+  thymeleaf:
+    prefix: file:src/main/resources/templates/
+    cache: 'false'
