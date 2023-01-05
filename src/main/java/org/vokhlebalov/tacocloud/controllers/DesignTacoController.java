@@ -17,6 +17,7 @@ import static org.vokhlebalov.tacocloud.entities.Ingredient.Type;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Slf4j
 @Controller
@@ -36,7 +37,12 @@ public class DesignTacoController {
         Arrays.stream(Type.values()).forEach(
                 type -> model.addAttribute(
                     type.toString().toLowerCase(),
-                    filterByType(ingredientRepository.findAll(), type)
+                    filterByType(
+                            StreamSupport.stream(
+                                    ingredientRepository.findAll().spliterator(),
+                                    false
+                            ).collect(Collectors.toList()),
+                            type)
                 )
         );
     }
